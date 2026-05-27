@@ -1,0 +1,24 @@
+RRL Presentation
+*- what is a stochastic process?
+*- why do we need stochastic processes?
+*- application of stochastic process (boundary conditions, monte carlo method, finance, stochastic NS)
+*- example: random walk (1D), random leaps (2D)
+*- Wiener process
+*- Levy process as combination of distributions
+*- white noise and colored noise
+*- Levy processes
+*- what is the appropriate noise to use?
+*- Stochastic integral: ito and stratonovich
+*- no analytical approach: discuss numerical methods: Euler-Maruyama, Milstein
+*- stability of numerical methods
+*- solve simple SDE: dy/dt = y + dW/dt (expand W by definition)
+- stochastic PDEs
+- stochastic NS and solution
+- currently there is no available model with stochastic NS: compare ADCIRC, JMA, Delft3D
+
+Thesis Proposal
+- addition of stochastic process in the momentum equations
+- can be transport noise, additional noise
+- modify delft3D or ADCIRC
+- analyze stochasticity in the output
+- visualization

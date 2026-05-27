@@ -1,0 +1,53 @@
+RRL Presentation
+*- what is a stochastic process?
+*- why do we need stochastic processes?
+*- application of stochastic process (boundary conditions, monte carlo method, finance, stochastic NS)
+*- example: random walk (1D), random leaps (2D)
+*- Wiener process
+*- Levy process as combination of distributions
+*- white noise and colored noise
+*- Levy processes
+*- what is the appropriate noise to use?
+*- Stochastic integral: ito and stratonovich
+*- no analytical approach: discuss numerical methods: Euler-Maruyama, Milstein
+*- stability of numerical methods
+*- solve simple SDE: dy/dt = y + dW/dt (expand W by definition)
+- stochastic PDEs
+- stochastic NS and solution
+- currently there is no available model with stochastic NS: compare ADCIRC, JMA, Delft3D
+
+Thesis Proposal
+- modify delft3D or ADCIRC
+- addition of stochastic process in the momentum equations, not in the continuity eqn
+- additional noise, space-correlated noise
+- why additive noise and OU process
+- analyze stochasticity in the output, solve numerically
+- visualization
+
+Outline of mock proposal
+
+Stochastic Modeling of Storm Surge in the Philippine Archipelago using ADCRIC+SWAN through parallel computing
+1. Problems in inconsistent surge height forecasts and observations
+- Show different predictions of different agencies
+2. No account for random forcing by other objects, like rocks, debris during storm surge
+- Show NOAA animation
+3. No model for stochastic NS using SPDE
+- Compare model equations: ADCIRC+SWAN, Delft3D, JMA, Slosh
+4. Still uses probabilistic approach, using large data of storm surge phenomena
+- Present relevant literature showing these
+- Simulating large storm surges using Monte Carlo, then getting the right one depending on the variables
+- Keywords: stochastic storm surge, probabilistic storm surge
+5. Approaches in storm surge modeling
+
+Relevance
+1. More realistic model and faster predictions
+
+Methodology
+1. Modify ADCIRC+SWAN parallel model
+2. Numerical method reduces to Mq=F
+3. Add gaussian/colored noise on the force vector, Levy jump-diffusion
+4. Able to isolate the deterministic and solve the stochastic part
+5. Compare results with the deterministic model
+6. Compare results with true observations
+
+Gantt Chart
