@@ -1,0 +1,97 @@
+ADCIRC+SWAN Sensitivity Analysis
+outline
+
+goal: reproduce results in Tacloban bay
+possible: vary four params in the storm surge phenomena in the climax time
+cftau vs G and H_min vs U_min
+
+1. analysis of wetting and drying algorithm
+2. H_min and U_min
+3. cftau - physical param, bottom friction
+4. G - numerical param, balance between WCE and PCE
+5. tau - equivalent linear bottom friction coeff in momentum equation
+GWCE allows balance between and primitive and pure wave forms for shallow equations
+
+
+Comparison of problems
+Linear Problem 1
+1. linear slope
+2. undisturbed length of 20 meters
+3. max depth 5 meters
+4. grid spacing of 250 meters
+5. dt 10 sec
+6. forcing amp .25 meters
+7. tidal period 12 hrs
+8. 4 tidal periods
+9. cftau = 0.001
+10. G = 0.001
+11. H_min = 0.01
+12. U_min = 0.01
+
+Linear Problem 2 (waves can wet and dry larger number of nodes)
+1. linear slope
+2. undisturbed length of 18 meters
+3. max depth 6 meters
+4. grid spacing of 250 meters
+5. dt 10 sec
+6. forcing amp 1.0 meters
+7. tidal period 12 hrs
+8. 4 tidal periods
+9. cftau = 0.001
+10. G = 0.001
+11. H_min = 0.01
+12. U_min = 0.01
+fig 7 lowest: cftau = 0.0001, G = 0.05
+fig 10 lowest: h_min = 0.005, Umin = 0.01
+analytical solution is frictionless
+
+Quadratic Problem
+1. quadratic sloping beach
+2. undisturbed length of 250 meters
+3. max depth 6 meters
+4. grid spacing of 250 meters
+5. dt 10 sec
+6. forcing amp 1.0 meters
+7. tidal period 12 hrs
+8. 4 tidal periods
+9. cftau = 0.001
+10. G = 0.001
+11. H_min = 0.01
+12. U_min = 0.01
+fig 14 lowest: cftau = 0.5, G = 1
+fig 17 lowest: h_min = 1, Umin = 1
+
+Beaufort Inlet Problem - '1stGen' domain
+1. 1D line of 2d domain
+2. undisturbed length of 56.8 meters
+3. max depth 53 meters
+4. variable grid spacing
+5. dt 10 sec
+6. forcing amp 1.0 meters
+7. tidal period 12 hrs
+8. 4 tidal periods
+9. cftau = 0.001
+10. G = 0.001
+11. H_min = 0.01
+12. U_min = 0.01
+fig 21 lowest: cftau = 0.05, G = 0.01 vs. cftau = 0.0001 G = 0.01
+
+Tacloban Airport problem
+1. 2D domain
+2.
+3.
+4. variable grid spacing
+5. dt 1 min
+6. 8 tidal constituents
+7. tidal period ??? hrs
+8. ??? tidal periods
+9. cftau = 0.001
+10. G = 0.001
+11. H_min = 0.01
+12. U_min = 0.01
+
+Explain variables
+Concentrate on G, cftau, H_min
+U_min has no significant effect on the behavior of the model
+
+Plan: compare surge heights with varying H_min

@@ -1,0 +1,67 @@
+% This is the color theme file of the SCL Minimal theme.
+% Copyright (c) 2015 by John Justine S. Villar <john_justine.villar@upd.edu.ph> 
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeSCLminimal}[2015/11/15 v1.2.1 The SCL Minimal Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+
+\definecolor{UPmaroon}{RGB}{142,23,26}
+\definecolor{SCLdarkblue}{RGB}{16,55,87}
+\definecolor{SCLdarkblue1}{RGB}{0,38,93}
+\definecolor{SCLdarkblue2}{RGB}{0,46,90}
+\definecolor{SCLdarkblue3}{RGB}{29,59,88}
+\definecolor{SCLlightblue}{RGB}{0,105,168}
+\definecolor{SCLgray}{RGB}{180,185,190}
+\definecolor{SCLgraytext}{RGB}{40,35,30}
+\definecolor{SCLgrayblue}{RGB}{84,97,110}
+  
+\setbeamercolor{SCLminimal}{fg=SCLgray,bg=SCLdarkblue}
+\setbeamercolor{structure}{fg=SCLdarkblue!40!SCLlightblue,bg=white}
+\setbeamercolor{headercolor}{bg=SCLdarkblue}
+\setbeamercolor{barcolor}{bg=SCLdarkblue}
+\setbeamercolor{frametitle}{fg=white,bg=SCLdarkblue}
+\setbeamercolor{normal text}{fg=SCLgraytext!78,bg=SCLgray!30}
+\setbeamercolor{title}{fg=structure.fg}
+
+\newcommand{\useSCLmaroonscheme}[0]{
+  \setbeamercolor{structure}{fg=UPmaroon,bg=white}
+  \setbeamercolor{structure1}{fg=UPmaroon,bg=white}
+  \setbeamercolor{headercolor}{bg=UPmaroon}
+  \setbeamercolor{barcolor}{bg=UPmaroon}
+  \setbeamercolor{normal text}{fg=SCLgraytext, bg=SCLgray!45}
+  \setbeamercolor{frametitle}{fg=white,bg=UPmaroon}
+  \setbeamercolor{SCLminimal}{fg=SCLgray,bg=UPmaroon}
+}
+
+\newcommand{\darktitlepagebg}[0]{
+  \setbeamercolor{title}{fg=white}
+  \setbeamercolor{author}{fg=white!95!structure.fg}
+  \setbeamercolor{date}{fg=gray!12}
+  \setbeamercolor{institute}{fg=white!85!structure.fg}
+} 
+
+
+
+}%end of beamer specific options
+
+\mode<all>
