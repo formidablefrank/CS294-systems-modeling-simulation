@@ -1,0 +1,230 @@
+% This is the outer theme file of the SCL Minimal theme derived from the AAU simple theme.
+% Copyright (c) 2015 by John Justine S. Villar <john_justine.villar@upd.edu.ph> 
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeSCLminimal}[2015/11/15 v1.2.1 The SCL Minimal Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Load required packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{biblatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%theme options
+% options for the progress bar/circle
+\def\beamer@progressfixedCircCnt{fixedCircCnt} % fixed circular counter
+\def\beamer@progressmovCircCnt{movCircCnt} % moving circular counter
+\def\beamer@progresscorner{corner} % a counter in the lower right corner
+%\def\beamer@progressmovCnt{movCnt} % 
+\def\beamer@progressstyle{fixedCircCnt}
+\DeclareOptionBeamer{progressstyle}{\def\beamer@progressstyle{#1}}
+\DeclareOptionBeamer{rotationcw}{\def\beamer@rotationcw{true}}
+\DeclareOptionBeamer{shownavsym}{\def\beamer@shownavsym{true}}
+\ProcessOptionsBeamer
+
+%the height of the header is 1.9 times the line height of the frame title
+\newlength{\beamer@height}
+\usebeamerfont{frametitle} %use the frame title font
+\setlength{\beamer@height}{1.9\baselineskip}
+% reset fonts
+\reset@font
+% radius of the logo
+\newlength{\beamer@logoradius}
+\setlength{\beamer@logoradius}{0.53\beamer@height}
+% width of the border
+\newlength{\beamer@borderwidth}
+\setlength{\beamer@borderwidth}{1.7mm}
+% inner radius of border of the logo frame
+\newlength{\beamer@logoinnerradius}
+\setlength{\beamer@logoinnerradius}{1.08\beamer@logoradius}
+% radius of the outer border of the logo frame
+\newlength{\beamer@logoouterradius}
+\setlength{\beamer@logoouterradius}{\beamer@logoinnerradius+\beamer@borderwidth}
+% radius of the counters
+\newlength{\beamer@counterradius}
+\setlength{\beamer@counterradius}{\beamer@logoinnerradius/2+\beamer@logoouterradius/2}
+% the progress
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+  \ifbeamercolorempty[fg]{SCLminimal}{%
+    %define the SCLminimal color if it is not defined (which may be due to that the SCLminimal color theme is not loaded)
+    \setbeamercolor{SCLminimal}{use={structure,palette sidebar primary},fg=palette sidebar primary.fg,bg=structure.fg}
+  }{%
+    %SCL header is defined - nothing to do
+  }
+ 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %templates
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+
+
+%headline
+\setbeamertemplate{headline}{\sclheaderbackground}
+
+\setbeamersize{text margin left=20pt,text margin right=20pt}
+%\setbeamertemplate{background canvas}[vertical shading][bottom=gray!5,middle=gray!10,top=gray!20]
+
+\setbeamertemplate{bibliography item}[article]
+\renewcommand*{\bibfont}{\footnotesize}
+  
+  %frame title
+  \setbeamertemplate{frametitle}{%
+    \begin{minipage}[c][\beamer@height][c]{\textwidth}
+      {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\par}%
+      {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+    \end{minipage}
+  }
+  
+  \ifx\beamer@shownavsym\undefined% insert navigation symbols
+    \setbeamertemplate{navigation symbols}{%
+      %disable navigation symbols
+    }
+  \fi
+  
+  \ifx\beamer@progressstyle\beamer@progresscorner% the progress in the lower right corner
+    \setbeamertemplate{footline}[frame number]
+  \fi
+}%end of beamer specific options
+
+
+\setbeamercolor*{footbar}{bg=SCLdarkblue,fg=white}
+\setbeamertemplate{footline}
+{
+  \linethickness{0.1pt}
+  \framelatex{
+  \begin{beamercolorbox}[leftskip=.2cm,rightskip=.2cm,wd=\paperwidth,ht=0.03\paperwidth,sep=0.1cm]{footbar}
+    \usebeamerfont{section in head/foot}%
+    \insertshortauthor~~---~~\insertshorttitle
+    \hfill 
+    \ifx\@shortevent\empty{{\ifx\@event\empty SCL Presentation\else\@event\fi}~~\textbar~~}
+    \else\@shortevent~~\textbar~~
+    \fi
+    \insertshortdate
+    %\textsc{Scientific Computing Laboratory, DCS, UPD}
+  \end{beamercolorbox}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Macros used in the theme 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the fancy header background
+\newcommand{\sclheaderbackground}[0]{%
+  \begin{tikzpicture}[overlay]
+    \coordinate (UL) at (0,0); %upper left corner of the slide
+    \coordinate (HLR) at (\paperwidth,-\beamer@height); %lower right of the header
+    \coordinate (logopos) at ([shift={(-\beamer@logoouterradius-\beamer@borderwidth,\beamer@height-\beamer@logoouterradius-0.5\beamer@borderwidth)}] HLR);%coordinate of the logo
+    %draw the background of the header, the circle and the logo
+    {\usebeamercolor{SCLminimal}%
+      \usebeamercolor{normal text}%
+      % draw the blue background rectangle of the header
+      \draw[draw=none,fill=SCLminimal.bg] (UL) rectangle (HLR);
+      % draw the outer circle
+      \fill[fill=SCLminimal.fg] (logopos) circle (\beamer@logoouterradius);
+      % draw the inner circle
+      \fill[fill=white] (logopos) circle (\beamer@logoinnerradius);
+      % place the logo
+      \node at (logopos) {\includegraphics[width=1.8\beamer@logoradius]{graphics/scllogofull}};  % % % % % % FRAME LOGO
+
+      %% draw progress circle/bar
+      \ifx\beamer@progressstyle\beamer@progressfixedCircCnt% the circular counter with a fixed counter
+        % calculate end position
+        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
+          \pgfmathsetmacro{\progress}{360/\inserttotalframenumber*\insertframenumber};
+        \else% clockwise rotation
+          \pgfmathsetmacro{\progress}{-360/\inserttotalframenumber*\insertframenumber};
+        \fi
+        % draw the arc
+        \draw[color=SCLminimal.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
+        \fill[fill=SCLminimal.bg] ([shift={(\progress:\beamer@counterradius)}] logopos) circle (0.25\beamer@borderwidth);
+        % place the current frame number
+        \node[fill=white,draw=SCLminimal.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius]logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+      
+      \ifx\beamer@progressstyle\beamer@progressmovCircCnt% the circular counter with a moving counter
+        % draw the current and total frame number
+        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
+          \pgfmathsetmacro{\progress}{360/\inserttotalframenumber*\insertframenumber};
+        \else% clockwise rotation
+          \pgfmathsetmacro{\progress}{-360/\inserttotalframenumber*\insertframenumber};
+        \fi
+        % draw the arc
+        \draw[color=SCLminimal.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc (0:\progress:\beamer@counterradius);
+        % place the total number of frames
+        \node[fill=white,draw=SCLminimal.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius] logopos) {{\usebeamercolor[fg]{normal text}\inserttotalframenumber}};
+        % place the current frame number
+        \node[fill=white,draw=SCLminimal.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([shift={(\progress:\beamer@counterradius)}] logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+    }
+  \end{tikzpicture}%
+}
+
+\newcommand{\noheader}[0]{%
+  \begin{tikzpicture}[overlay]
+    \coordinate (UL) at (0,0); %upper left corner of the slide
+    \coordinate (HLR) at (\paperwidth,-\beamer@height); %lower right of the header
+    \coordinate (logopos) at ([shift={(-\beamer@logoouterradius-\beamer@borderwidth,\beamer@height-\beamer@logoouterradius-0.5\beamer@borderwidth)}] HLR);%coordinate of the logo
+    %draw the background of the header, the circle and the logo
+    {\usebeamercolor{SCLminimal}%
+      \usebeamercolor{normal text}%
+      % draw the gray background rectangle of the header
+      \draw[draw=none,fill=normal text.bg] (UL) rectangle (HLR);
+      % draw the outer circle
+      \fill[fill=SCLminimal.fg] (logopos) circle (\beamer@logoouterradius);
+      % draw the inner circle
+      \fill[fill=white] (logopos) circle (\beamer@logoinnerradius);
+      % place the logo
+      \node at (logopos) {\includegraphics[width=1.8\beamer@logoradius]{graphics/scllogofull}};  % % % % % % FRAME LOGO
+
+      %% draw progress circle/bar
+      \ifx\beamer@progressstyle\beamer@progressfixedCircCnt% the circular counter with a fixed counter
+        % calculate end position
+        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
+          \pgfmathsetmacro{\progress}{360*\insertframenumber/\inserttotalframenumber};
+        \else% clockwise rotation
+          \pgfmathsetmacro{\progress}{-360*\insertframenumber/\inserttotalframenumber};
+        \fi
+        % draw the arc
+        \draw[color=SCLminimal.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
+        \fill[fill=SCLminimal.bg] ([shift={(\progress:\beamer@counterradius)}] logopos) circle (0.25\beamer@borderwidth);
+        % place the current frame number
+        \node[fill=white,draw=SCLminimal.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius]logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+      
+      \ifx\beamer@progressstyle\beamer@progressmovCircCnt% the circular counter with a moving counter
+        % draw the current and total frame number
+        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
+          \pgfmathsetmacro{\progress}{360*\insertframenumber/\inserttotalframenumber};
+        \else% clockwise rotation
+          \pgfmathsetmacro{\progress}{-360*\insertframenumber/\inserttotalframenumber};
+        \fi
+        % draw the arc
+        \draw[color=SCLminimal.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc (0:\progress:\beamer@counterradius);
+        % place the total number of frames
+        \node[fill=white,draw=SCLminimal.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius] logopos) {{\usebeamercolor[fg]{normal text}\inserttotalframenumber}};
+        % place the current frame number
+        \node[fill=white,draw=SCLminimal.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([shift={(\progress:\beamer@counterradius)}] logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+    }
+  \end{tikzpicture}%
+}
+
+\mode<all>
